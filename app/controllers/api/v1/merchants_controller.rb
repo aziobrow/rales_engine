@@ -1,7 +1,6 @@
 class Api::V1::MerchantsController < ApplicationController
   def index
     render json: Merchant.all
-  end
 
   def create
     render json: Merchant.create(merchant_params)
