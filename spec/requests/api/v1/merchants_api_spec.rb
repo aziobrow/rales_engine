@@ -22,4 +22,16 @@ describe "Merchants API" do
     expect(response).to be_success
     expect(merchant.name).to eq(merchant_params[:name])
   end
+
+  it "sends a single merchant" do
+    merchant = create(:merchant)
+    get "/api/v1/merchants/#{merchant.id}"
+    merchant_info = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_success
+    expect(merchant_info).to have_key(:id)
+    expect(merchant_info).to have_key(:name)
+    expect(merchant_info).to have_value(merchant.id)
+    expect(merchant_info).to have_value(merchant.name)
+  end
 end
