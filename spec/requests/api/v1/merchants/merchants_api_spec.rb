@@ -13,16 +13,6 @@ describe "Merchants API" do
     expect(merchant).to have_key(:name)
   end
 
-  it "creates a new merchant" do
-    merchant_params = { name: "Lauren Smith"}
-
-    post "/api/v1/merchants", params: {merchant: merchant_params}
-    merchant = Merchant.last
-
-    expect(response).to be_success
-    expect(merchant.name).to eq(merchant_params[:name])
-  end
-
   it "sends a single merchant" do
     merchant = create(:merchant)
     get "/api/v1/merchants/#{merchant.id}"
