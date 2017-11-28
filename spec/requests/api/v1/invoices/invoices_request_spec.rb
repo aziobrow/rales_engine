@@ -12,10 +12,9 @@ describe "Invoices API" do
     expect(response).to be_success
     expect(invoices.count).to eq(3)
     expect(invoice).to have_key(:id)
-    # byebug
     expect(invoice).to have_key(:status)
-    expect(invoice).to have_key(:created_at)
-
+    expect(invoice).to have_key(:customer_id)
+    
   end
 
   it "returns values for a single invoice" do
@@ -29,6 +28,6 @@ describe "Invoices API" do
     expect(response).to be_success
     expect(invoice).to have_key(:id)
     expect(invoice).to have_key(:status)
-    expect(invoice).to have_key(:created_at)
+    expect(invoice).to have_key(:customer_id)
   end
 end
