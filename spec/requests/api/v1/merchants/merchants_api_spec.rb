@@ -24,4 +24,15 @@ describe "Merchants API" do
     expect(merchant_info).to have_value(merchant.id)
     expect(merchant_info).to have_value(merchant.name)
   end
+
+  it "includes only id and name" do
+    merchant = create(:merchant)
+    get "/api/v1/merchants/#{merchant.id}"
+    merchant_info = JSON.parse(response.body, symbolize_names: true)
+    expect(response).to be_success
+    expect(merchant_info).to have_key(:id)
+    expect(merchant_info).to have_key(:name)
+    expect(merchant_info).to_not have_key(:created_at)
+    expect(merchant_info).to_not have_key(:updated_at)
+  end
 end
