@@ -8,12 +8,11 @@ describe "Search Invoices using find and parameters" do
     get "/api/v1/invoices/find?id=#{invoice.id}"
     expect(response).to be_success
 
-    # invoice = JSON.parse(response.body, symbolize_names: true)
-    #
-    # expect(invoice).to have_key(:id)
-    # # byebug
-    # expect(invoice).to have_key(:status)
-    # expect(invoice).to have_key(:created_at)
+    invoice = JSON.parse(response.body, symbolize_names: true)
+
+    expect(invoice).to have_key(:id)
+    expect(invoice).to have_key(:status)
+    expect(invoice).to have_key(:created_at)
 
   end
 
