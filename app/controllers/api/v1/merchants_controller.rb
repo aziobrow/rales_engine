@@ -1,6 +1,6 @@
 class Api::V1::MerchantsController < ApplicationController
   def index
-    render json: Merchant.parse_index_params(params)
+    render json: Merchant.all
   end
 
   def create
@@ -8,7 +8,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    render json: Merchant.parse_show_params(params)
+    render json: Merchant.find(params[:id])
   end
 
   private

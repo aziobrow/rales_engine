@@ -1,4 +1,4 @@
-class Api::V1::SearchController < ApplicationController
+class Api::V1::Merchants::SearchController < ApplicationController
   def index
     if params[:name]
       render json: Merchant.where(name: params[:name])
@@ -10,12 +10,6 @@ class Api::V1::SearchController < ApplicationController
   end
 
   def show
-    if params[:name]
-      render json: Merchant.find_by(name: params[:name])
-    elsif params[:created_at]
-      render json: Merchant.find_by(created_at: params[:created_at])
-    elsif params[:updated_at]
-      render json: Merchant.find_by(updated_at: params[:created_at])
-    end
+    render json: Merchant.parse_params(params)
   end
 end
