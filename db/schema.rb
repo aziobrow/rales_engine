@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171128025158) do
+=======
+ActiveRecord::Schema.define(version: 20171128060448) do
+>>>>>>> merchants
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+<<<<<<< HEAD
   create_table "invoices", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "merchant_id"
     t.string "status"
+=======
+  create_table "merchants", force: :cascade do |t|
+    t.string "name"
+>>>>>>> merchants
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
