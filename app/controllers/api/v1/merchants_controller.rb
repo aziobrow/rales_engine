@@ -8,7 +8,11 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    render json: Merchant.find(params[:id])
+    if params[:id] == "find"
+      redirect_to "/api/v1/merchants/search_controller"
+    else
+      render json: Merchant.find(params[:id])
+    end
   end
 
   private
