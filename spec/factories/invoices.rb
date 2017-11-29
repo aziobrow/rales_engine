@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :invoice do
-    customer_id 1
-    merchant_id 1
+
+    sequence(:customer_id)  {|n| "#{n}" }
+    sequence(:merchant_id)  {|n| "#{n}" }
     status "shipped"
     created_at "Time1"
     updated_at "Time2"
