@@ -14,7 +14,9 @@ describe "Invoices API" do
     expect(invoice).to have_key(:id)
     expect(invoice).to have_key(:status)
     expect(invoice).to have_key(:customer_id)
-    
+    expect(invoice).to_not have_key(:created_at)
+    expect(invoice).to_not have_key(:updated_at)
+
   end
 
   it "returns values for a single invoice" do
@@ -29,5 +31,7 @@ describe "Invoices API" do
     expect(invoice).to have_key(:id)
     expect(invoice).to have_key(:status)
     expect(invoice).to have_key(:customer_id)
+    expect(invoice).to_not have_key(:created_at)
+    expect(invoice).to_not have_key(:updated_at)
   end
 end
