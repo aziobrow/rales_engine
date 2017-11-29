@@ -1,6 +1,5 @@
 class Api::V1::Customers::SearchController < ApplicationController
   def index
-    require "pry"; binding.pry
     render json: Customer.where(search_params)
   end
 
