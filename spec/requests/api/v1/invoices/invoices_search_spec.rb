@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 describe "Search Invoices using find and parameters" do
-  it "returns an invoice based on the id" do
+  before do
     create_list(:invoice, 3)
-    invoice = Invoice.last
+    @invoice = Invoice.last
+  end
 
-    get "/api/v1/invoices/find?id=#{invoice.id}"
+
+  it "returns an invoice based on the id" do
+
+    get "/api/v1/invoices/find?id=#{@invoice.id}"
     expect(response).to be_success
 
     invoice = JSON.parse(response.body, symbolize_names: true)
@@ -16,10 +20,8 @@ describe "Search Invoices using find and parameters" do
   end
 
   it "returns an invoice based on the status" do
-    create_list(:invoice, 3)
-    invoice = Invoice.last
 
-    get "/api/v1/invoices/find?status=#{invoice.status}"
+    get "/api/v1/invoices/find?status=#{@invoice.status}"
     expect(response).to be_success
 
     invoice = JSON.parse(response.body, symbolize_names: true)
@@ -29,33 +31,40 @@ describe "Search Invoices using find and parameters" do
 
   end
 
-  xit "returns an invoice based on the created_at date time" do
-    create_list(:invoice, 3)
-    invoice = Invoice.last
+  it "returns an invoice based on the created_at date time" do
 
-    byebug
-
-    get "/api/v1/invoices/find?created_at=#{invoice.created_at}"
+    get "/api/v1/invoices/find?created_at=#{@invoice.created_at}"
     expect(response).to be_success
 
-    invoice = JSON.parse(response.body, symbolize_names: true)
-
-    expect(invoice).to have_key(:id)
-    expect(invoice).to have_key(:status)
+    # invoice = JSON.parse(response.body, symbolize_names: true)
+    # expect(invoice).to have_key(:id)
+    # expect(invoice).to have_key(:status)
 
   end
 
   it "returns an invoice based on a random selection" do
-    create_list(:invoice, 3)
-    invoice = Invoice.last
 
-    get "/api/v1/invoices/random?"
+    get "/api/v1/invoices/random"
     expect(response).to be_success
 
-    invoice = JSON.parse(response.body, symbolize_names: true)
+    # invoice = JSON.parse(response.body, symbolize_names: true)
+    #
+    # expect(invoice).to have_key(:id)
+    # expect(invoice).to have_key(:status)
+  end
 
-    expect(invoice).to have_key(:id)
-    expect(invoice).to have_key(:status)
+  # NEXT DO FIND_ALL
+  it "returns all invoices based on the status" do
+
+    get "/api/v1/invoices/find?status=shipped"
+    expect(response).to be_success
+
+    invoices = JSON.parse(response.body, symbolize_names: true)
+
+    expect(invoices.count).to eq(4)
+    expect(invoices[:customer_id]).to eq(19)
+    expect(invoices[:merchant_id]).to eq(19)
+
   end
 
 end
