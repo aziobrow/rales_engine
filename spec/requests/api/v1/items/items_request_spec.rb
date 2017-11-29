@@ -8,8 +8,19 @@ describe "Items API" do
     get "/api/v1/items"
 
     items = JSON.parse(response.body, symbolize_names: true)
+    item = items.first
 
     expect(response).to be_success
+
+    expect(items.count).to eq(3)
+    expect(item).to have_key(:id)
+    expect(item).to have_key(:name)
+    expect(item).to have_key(:description)
+    expect(item).to have_key(:unit_price)
+    expect(item).to have_key(:merchant_id)
+    expect(item).to_not have_key(:created_at)
+    expect(item).to_not have_key(:updated_at)
+    
   end
 
 end
