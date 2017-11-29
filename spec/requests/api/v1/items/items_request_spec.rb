@@ -4,7 +4,7 @@ describe "Items API" do
 
   it "renders a list of items" do
 
-    create_list(:items, 3)
+    create_list(:item, 3)
     get "/api/v1/items"
 
     items = JSON.parse(response.body, symbolize_names: true)
