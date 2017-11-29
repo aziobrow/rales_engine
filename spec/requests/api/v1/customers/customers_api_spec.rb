@@ -32,6 +32,7 @@ describe "Customers API" do
     customer = create(:customer)
     get "/api/v1/customers/#{customer.id}"
     customer_info = JSON.parse(response.body, symbolize_names: true)
+
     expect(response).to be_success
     expect(customer_info).to have_key(:id)
     expect(customer_info).to have_key(:first_name)
