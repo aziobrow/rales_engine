@@ -13,7 +13,7 @@ describe "Items API" do
   end
 
 end
-
+id,name,description,unit_price,merchant_id,created_at,updated_at
 # require 'rails_helper'
 #
 # describe "Invoices API" do
@@ -38,7 +38,7 @@ end
 #     id = Invoice.last.id
 #
 #     get "/api/v1/invoices/#{id}"
-# 
+#
 #     invoice = JSON.parse(response.body, symbolize_names: true)
 #
 #     expect(response).to be_success
