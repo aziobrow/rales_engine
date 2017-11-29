@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Merchants Finder API" do
+describe "Merchants Find API" do
   before do
     create_list(:merchant, 3)
     @merchant = Merchant.first
