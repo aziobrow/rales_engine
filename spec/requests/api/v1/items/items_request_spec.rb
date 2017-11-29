@@ -13,7 +13,7 @@ describe "Items API" do
   end
 
 end
-id,name,description,unit_price,merchant_id,created_at,updated_at
+# id,name,description,unit_price,merchant_id,created_at,updated_at
 # require 'rails_helper'
 #
 # describe "Invoices API" do
