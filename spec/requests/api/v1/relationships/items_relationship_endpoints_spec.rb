@@ -3,15 +3,14 @@ require 'rails_helper'
 describe "Items Relationship Endpoints API" do
   before do
     @merchant = create(:merchant)
-    item1 = create(:item, merchant_id: @merchant.id)
-    item2 = create(:item)
+    @item = create(:item, merchant_id: @merchant.id)
     invoice = create(:invoice, merchant_id: @merchant.id)
-    @invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
-    @invoice_item2 = create(:invoice_item, item_id: item2.id, invoice_id: invoice.id)
+    @invoice_item1 = create(:invoice_item, item_id: @item.id, invoice_id: invoice.id)
+    @invoice_item2 = create(:invoice_item, item_id: @item.id, invoice_id: invoice.id)
   end
 
     it "finds associated invoice items for one item" do
-      get "/api/v1/items/:id/invoice_items"
+      get "/api/v1/items/#{@item.id}/invoice_items"
       invoice_items = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_success
@@ -21,7 +20,7 @@ describe "Items Relationship Endpoints API" do
     end
 
     it "finds associated merchant for one item" do
-      get "/api/v1/items/:id/merchant"
+      get "/api/v1/items/#{@item.id}/merchant"
       merchant = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_success
