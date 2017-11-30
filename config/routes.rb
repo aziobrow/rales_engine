@@ -9,6 +9,8 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
+          get '/:id/items' => "items#show"
+          get '/:id/invoices' => "invoices#show"
       end
       resources :merchants, only: %i[show index]
 
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/invoice' => "invoices#index"
+          get '/:id/invoice' => "invoices#index"
       end
       resources :transactions, only: %i[show index]
 
@@ -28,8 +30,8 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/transactions' => "transactions#index"
-          get '/invoice' => "invoices#index"
+          get '/:id/transactions' => "transactions#index"
+          get '/:id/invoices' => "invoices#index"
       end
       resources :customers, only: %i[show index]
 
@@ -39,11 +41,11 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/transactions' => "transactions#index"
-          get '/invoice_items' => "invoice_items#index"
-          get '/items' => "items#index"
-          get '/customer' => "customers#show"
-          get '/merchant' => "merchants#show"
+          get '/:id/transactions' => "transactions#index"
+          get '/:id/invoice_items' => "invoice_items#index"
+          get '/:id/items' => "items#index"
+          get '/:id/customer' => "customers#show"
+          get '/:id/merchant' => "merchants#show"
       end
       resources :invoices, only: [:index, :show]
 
@@ -53,7 +55,7 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/invoice_items' => "invoice_items#index"
+          get '/:id/invoice_items' => "invoice_items#index"
           get '/:id/merchant' => "merchants#show"
       end
       resources :items, only: %i[show index]
