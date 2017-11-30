@@ -5,7 +5,7 @@ describe "Customers Business Analytics Endpoints API" do
     @merchant1 = create(:merchant)
     merchant2 = create(:merchant)
     customer = create(:customer)
-    invoice1 = create(:invoice, customer: customer, merchant: merchant1)
+    invoice1 = create(:invoice, customer: customer, merchant: @merchant1)
     invoice2 = create(:invoice, customer: customer, merchant: merchant2)
     create(:transaction, result: "success", invoice: invoice1)
     create(:transaction, result: "success", invoice: invoice1)

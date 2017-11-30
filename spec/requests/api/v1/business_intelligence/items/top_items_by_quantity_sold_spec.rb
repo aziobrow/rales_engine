@@ -6,8 +6,8 @@ describe "Items Business Analytics Endpoints API" do
     @item2 = create(:item)
     item3 = create(:item)
     @item4 = create(:item)
-    date = Date.now
-    later_date = Date.now + 3.days
+    date = Date.new
+    later_date = Date.new + 3.days
     invoice1 = create(:invoice)
     @invoice2 = create(:invoice, created_at: date)
     @invoice3 = create(:invoice, created_at: later_date)
