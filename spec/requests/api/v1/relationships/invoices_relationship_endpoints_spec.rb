@@ -13,7 +13,6 @@ describe "Invoices Relationship Endpoints API" do
     @invoice_item2 = create(:invoice_item, invoice_id: invoice.id)
   end
 
-  end
 
   it "finds associated transactions for one invoice" do
     get "/api/v1/invoices/:id/transactions"
