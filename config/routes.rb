@@ -22,7 +22,7 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/:id/invoice' => "invoices#index"
+          get '/:id/invoice' => "invoices#show"
       end
       resources :transactions, only: %i[show index]
         resources :invoices, only: [:show]
