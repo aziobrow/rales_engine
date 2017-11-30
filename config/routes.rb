@@ -9,10 +9,11 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
-          get '/:id/items' => "items#show"
-          get '/:id/invoices' => "invoices#show"
+
       end
       resources :merchants, only: %i[show index]
+        resources :items, only: [:show]
+        resources :invoices, only: [:show]
 
       namespace :transactions do
         controller :search do
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
           get '/:id/invoice' => "invoices#index"
       end
       resources :transactions, only: %i[show index]
+        resources :invoices, only: [:show]
 
       namespace :customers do
         controller :search do
