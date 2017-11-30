@@ -15,7 +15,7 @@ describe "Items Business Analytics Endpoints API" do
     create(:invoice_item, item: @item1, quantity: 3)
     create(:invoice_item, item: @item4, quantity: 2)
     create(:invoice_item, item: item3, quantity: 1)
-    create(:invoice_item, item: @item2, quantity: 10, invoice: invoice2)
+    create(:invoice_item, item: @item2, quantity: 10, invoice: @invoice2)
   end
 
     it "returns the top x items ranked by quantity sold" do
