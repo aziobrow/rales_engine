@@ -3,8 +3,9 @@ require 'rails_helper'
 describe "Items Relationship Endpoints API" do
   before do
     @merchant = create(:merchant)
+    customer = create(:customer)
     @item = create(:item, merchant_id: @merchant.id)
-    invoice = create(:invoice, merchant_id: @merchant.id)
+    invoice = create(:invoice, merchant_id: @merchant.id, customer_id: customer.id)
     @invoice_item1 = create(:invoice_item, item_id: @item.id, invoice_id: invoice.id)
     @invoice_item2 = create(:invoice_item, item_id: @item.id, invoice_id: invoice.id)
   end

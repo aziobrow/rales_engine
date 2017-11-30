@@ -9,6 +9,8 @@ Rails.application.routes.draw do
           get '/find_all' => :index
         end
           get '/random' => "random#show"
+          get '/:id/items' => "items#index"
+          get '/:id/invoices' => "invoices#index"
 
       end
       resources :merchants, only: %i[show index]
