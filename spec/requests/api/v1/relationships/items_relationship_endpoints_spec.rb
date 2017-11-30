@@ -3,9 +3,9 @@ require 'rails_helper'
 describe "Items Relationship Endpoints API" do
   before do
     @merchant = create(:merchant)
-    @item1 = create(:item, merchant_id: merchant.id)
-    @item2 = create(:item)
-    invoice = create(:invoice, merchant_id: merchant.id)
+    item1 = create(:item, merchant_id: @merchant.id)
+    item2 = create(:item)
+    invoice = create(:invoice, merchant_id: @merchant.id)
     @invoice_item1 = create(:invoice_item, item_id: item1.id, invoice_id: invoice.id)
     @invoice_item2 = create(:invoice_item, item_id: item2.id, invoice_id: invoice.id)
   end
@@ -26,6 +26,5 @@ describe "Items Relationship Endpoints API" do
 
       expect(response).to be_success
       expect(merchant).to have_value(@merchant.id)
-      expect(merchant).to have_value(@merchant.name)
     end
 end
