@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe "Transactions Find All API" do
   before do
-    @transaction = create(:transaction, invoice_id: 1, updated_at: Time.now)
-    @second_transaction = create(:transaction, invoice_id: 1, result: "failed", created_at: @transaction.updated_at)
+    invoice = create(:invoice)
+    @transaction = create(:transaction, invoice_id: invoice.id, updated_at: Time.now)
+    @second_transaction = create(:transaction, invoice_id: invoice.id, result: "failed", created_at: @transaction.updated_at)
     @last_transaction = create(:transaction, created_at: @transaction.updated_at)
   end
 
