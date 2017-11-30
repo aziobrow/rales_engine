@@ -11,14 +11,14 @@ describe "InvoiceItems Find All API" do
   it "finds all by id" do
     get "/api/v1/invoice_items/find_all?id=#{@invoice_item_1.id}"
     invoice_items = JSON.parse(response.body, symbolize_names: true)
-
+# byebug
     expect(response).to be_success
     expect(invoice_items.count).to eq(1)
     expect(invoice_items.first).to have_value(@invoice_item_1.id)
     expect(invoice_items.first).to have_value(@invoice_item_1.invoice_id)
     expect(invoice_items.first).to have_value(@invoice_item_1.item_id)
     expect(invoice_items.first).to have_value(@invoice_item_1.quantity)
-    expect(invoice_items.first).to have_value(@invoice_item_1.unit_price)
+    expect(invoice_items.first).to have_value((@invoice_item_1.unit_price).to_f / 100)
   end
 
   it "finds all by item_id" do
