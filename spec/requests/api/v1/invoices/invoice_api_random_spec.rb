@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Search Invoices using find and parameters" do
+describe "Search Invoices using random" do
 
   it "returns an invoice based on a random selection" do
     create_list(:invoice, 3)
