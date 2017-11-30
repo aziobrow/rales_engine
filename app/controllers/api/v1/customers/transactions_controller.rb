@@ -1,7 +1,7 @@
 class Api::V1::Customers::TransactionsController < ApplicationController
 
   def index
-    render json: Transaction.customer_transactions
+    render json: Customer.find(params[:id]).transactions 
   end
 
 end

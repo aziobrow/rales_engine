@@ -39,12 +39,12 @@ describe "Customer relationship endpoints" do
     happy_transactions = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
-    expect(happy_transactions[0]).to have_value(transactions_1.invoice_id)
-    expect(happy_transactions[1]).to have_value(transactions_2.invoice_id)
-    expect(happy_transactions[2]).to have_value(transactions_3.invoice_id)
-    expect(happy_transactions[0]).to_not have_value(sad_transaction[:invoice_id])
-    expect(happy_transactions[1]).to_not have_value(sad_transaction[:invoice_id])
-    expect(happy_transactions[2]).to_not have_value(sad_transaction[:invoice_id])
+    expect(happy_transactions[0]).to have_value(transaction_1.invoice_id)
+    expect(happy_transactions[1]).to have_value(transaction_2.invoice_id)
+    expect(happy_transactions[2]).to have_value(transaction_3.invoice_id)
+    expect(happy_transactions[0]).to_not have_value(sad_transaction.invoice_id)
+    expect(happy_transactions[1]).to_not have_value(sad_transaction.invoice_id)
+    expect(happy_transactions[2]).to_not have_value(sad_transaction.invoice_id)
 
   end
 
