@@ -5,17 +5,17 @@ describe "Invoices Relationship Endpoints API" do
     @merchant = create(:merchant)
     @customer = create(:customer)
     @item1 = create(:item, merchant_id: @merchant.id)
-    @item2 = create(:item)
-    invoice = create(:invoice, merchant_id: @merchant.id, customer_id: @customer.id)
-    @transaction1 = create(:transaction, invoice_id: invoice.id)
-    @transaction2 = create(:transaction, invoice_id: invoice.id)
-    @invoice_item1 = create(:invoice_item, invoice_id: invoice.id)
-    @invoice_item2 = create(:invoice_item, invoice_id: invoice.id)
+    @item2 = create(:item, merchant_id: @merchant.id)
+    @invoice = create(:invoice, merchant_id: @merchant.id, customer_id: @customer.id)
+    @transaction1 = create(:transaction, invoice_id: @invoice.id)
+    @transaction2 = create(:transaction, invoice_id: @invoice.id)
+    @invoice_item1 = create(:invoice_item, item_id: @item1.id, invoice_id: @invoice.id)
+    @invoice_item2 = create(:invoice_item, item_id: @item2.id, invoice_id: @invoice.id)
   end
 
 
   it "finds associated transactions for one invoice" do
-    get "/api/v1/invoices/:id/transactions"
+    get "/api/v1/invoices/#{@invoice.id}/transactions"
     transactions = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
@@ -25,7 +25,7 @@ describe "Invoices Relationship Endpoints API" do
   end
 
   it "finds associated invoice items for one invoice" do
-    get "/api/v1/invoices/:id/invoice_items"
+    get "/api/v1/invoices/#{@invoice.id}/invoice_items"
     invoice_items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
@@ -35,7 +35,7 @@ describe "Invoices Relationship Endpoints API" do
   end
 
   it "finds associated items for one invoice" do
-    get "/api/v1/invoices/:id/items"
+    get "/api/v1/invoices/#{@invoice.id}/items"
     items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
@@ -45,7 +45,7 @@ describe "Invoices Relationship Endpoints API" do
   end
 
   it "finds associated customer for one invoice" do
-    get "/api/v1/invoices/:id/customer"
+    get "/api/v1/invoices/#{@invoice.id}/customer"
     customer = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
@@ -53,11 +53,11 @@ describe "Invoices Relationship Endpoints API" do
   end
 
   it "finds associated merchant for one invoice" do
-    get "/api/v1/invoices/:id/merchant"
+    get "/api/v1/invoices/#{@invoice.id}/merchant"
     merchant = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
-    expect(customer).to have_value(@merchant.id)
+    expect(merchant).to have_value(@merchant.id)
   end
 
 end
