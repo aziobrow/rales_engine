@@ -1,47 +1,80 @@
 require 'rails_helper'
 
-describe "Item_invoices Find All API" do
+describe "InvoiceItems Find All API" do
   before do
-    @invoice_item = create(:invoice_item, name: "Aurora", updated_at: Time.now)
-    @second_invoice_item = create(:invoice_item, name: "Aurora", created_at: @invoice_item.updated_at)
-    @last_invoice_item = create(:invoice_item, created_at: @invoice_item.updated_at)
+    create_list(:invoice_item, 3)
+    @invoice_item_1 = InvoiceItem.first
+    @invoice_item_2 = InvoiceItem.second
+    @invoice_item_3 = InvoiceItem.last
   end
 
   it "finds all by id" do
-    get "/api/v1/invoice_items/find_all?id=#{@invoice_item.id}"
+    get "/api/v1/invoice_items/find_all?id=#{@invoice_item_1.id}"
     invoice_items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
     expect(invoice_items.count).to eq(1)
-    expect(invoice_items.first).to have_value(@invoice_item.id)
+    expect(invoice_items.first).to have_value(@invoice_item_1.id)
+    expect(invoice_items.first).to have_value(@invoice_item_1.invoice_id)
+    expect(invoice_items.first).to have_value(@invoice_item_1.item_id)
+    expect(invoice_items.first).to have_value(@invoice_item_1.quantity)
+    expect(invoice_items.first).to have_value(@invoice_item_1.unit_price)
   end
 
-  it "finds all by name" do
-    get "/api/v1/invoice_items/find_all?name=#{@invoice_item.name}"
-    invoice_items = JSON.parse(response.body, symbolize_names: true)
-
-    expect(response).to be_success
-    expect(invoice_items.count).to eq(2)
-    expect(invoice_items.first).to have_value(@invoice_item.id)
-    expect(invoice_items.second).to have_value(@second_invoice_item.id)
-  end
-
-  xit "finds all by created at date" do
-    get "/api/v1/invoice_items/find_all?created_at=#{@second_invoice_item.created_at}"
-    invoice_items = JSON.parse(response.body, symbolize_names: true)
-
-    expect(response).to be_success
-    expect(invoice_items.count).to eq(2)
-    expect(invoice_items.first).to have_value(@second_invoice_item.id)
-    expect(invoice_items.second).to have_value(@last_invoice_item.id)
-  end
-
-  xit "finds all by updated at date" do
-    get "/api/v1/invoice_items/find_all?updated_at=#{@invoice_item.updated_at}"
+  it "finds all by item_id" do
+    get "/api/v1/invoice_items/find_all?item_id=#{@invoice_item_1.item_id}"
     invoice_items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
     expect(invoice_items.count).to eq(1)
-    expect(invoice_items.first).to have_value(@invoice_item.id)
+    expect(invoice_items[0]).to have_value(@invoice_item_1.id)
+    expect(invoice_items[0]).to_not have_value(@invoice_item_3.id)
+
   end
+
+  it "finds all by quantity" do
+    get "/api/v1/invoice_items/find_all?quantity=#{@invoice_item_1.quantity}"
+    invoice_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_success
+    expect(invoice_items.count).to eq(3)
+    expect(invoice_items.first).to have_value(@invoice_item_1.id)
+    expect(invoice_items.last).to have_value(@invoice_item_3.id)
+
+  end
+
+  it "finds all by unit price" do
+    get "/api/v1/invoice_items/find_all?unit_price=#{@invoice_item_1.unit_price}"
+    invoice_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_success
+    expect(invoice_items.count).to eq(3)
+    expect(invoice_items.first).to have_value(@invoice_item_1.id)
+    expect(invoice_items.last).to have_value(@invoice_item_3.id)
+
+  end
+
+  xit "finds all by created date" do
+    get "/api/v1/invoice_items/find_all?created_at=#{@invoice_item_1.created_at}"
+    invoice_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_success
+    expect(invoice_items.count).to eq(1)
+    expect(invoice_items.first).to have_value(@invoice_item_1.id)
+
+    expect(invoice_items).to_not have_value(@invoice_item_2.id)
+  end
+
+  xit "finds all by updated date" do
+    get "/api/v1/invoice_items/find_all?updated_at=#{@invoice_item_1.updated_at}"
+    invoice_items = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_success
+    expect(invoice_items.count).to eq(1)
+    expect(invoice_items.first).to have_value(@invoice_item_1.id)
+
+    expect(invoice_items.first).to_not have_value(@invoice_item_2.id)
+  end
+
+
 end
