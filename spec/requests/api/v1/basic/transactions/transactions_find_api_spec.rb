@@ -47,27 +47,31 @@ describe "Transactions Find API" do
     expect(transaction_info).to_not have_value(@last_transaction.id)
   end
 
-  xit "finds by created at date" do
-    get "/api/v1/transactions/find?created_at=#{@second_transaction.created_at}"
+  it "finds by created at date" do
+
+    create_list(:transaction, 2)
+    last_transaction = create(:transaction, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+
+    get "/api/v1/transactions/find?created_at=2012-03-27 14:54:05 UTC"
     transaction_info = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
-    expect(transaction_info).to have_value(@second_transaction.id)
-    expect(transaction_info).to have_value(@second_transaction.invoice_id)
-    expect(transaction_info).to have_value(@second_transaction.result)
-    expect(transaction_info).to_not have_value(@last_transaction.id)
-    expect(transaction_info).to_not have_value(@second_transaction.id)
+    expect(transaction_info).to have_value(last_transaction.id)
+    expect(transaction_info).to have_value(last_transaction.invoice_id)
+    expect(transaction_info).to have_value(last_transaction.result)
+
   end
 
-  xit "finds by updated at date" do
-    get "/api/v1/transactions/find?updated_at=#{@last_transaction.updated_at}"
+  it "finds by updated at date" do
+    create_list(:transaction, 2)
+    last_transaction = create(:transaction, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+
+    get "/api/v1/transactions/find?updated_at=2012-03-27 14:54:05 UTC"
     transaction_info = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
-    expect(transaction_info).to have_value(@last_transaction.id)
-    expect(transaction_info).to have_value(@last_transaction.invoice_id)
-    expect(transaction_info).to have_value(@last_transaction.result)
-    expect(transaction_info).to_not have_value(@transaction.id)
-    expect(transaction_info).to_not have_value(@second_transaction.id)
+    expect(transaction_info).to have_value(last_transaction.id)
+    expect(transaction_info).to have_value(last_transaction.invoice_id)
+    expect(transaction_info).to have_value(last_transaction.result)
   end
 end

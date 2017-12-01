@@ -3,8 +3,8 @@ require 'rails_helper'
 describe "Search Items using find_all and parameters" do
   before do
     merchant = create(:merchant)
-    @item_1 = create(:item, name: "Bouncy Ball", description: "Fun!", merchant_id: merchant.id)
-    @item_2 = create(:item, description: "Fun!", merchant_id: merchant.id)
+    @item_1 = create(:item, name: "Bouncy Ball", description: "Fun!", merchant_id: merchant.id, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+    @item_2 = create(:item, description: "Fun!", merchant_id: merchant.id, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
     @item_3 = create(:item, name: "Bouncy Ball")
     @item_4 = create(:item, description: "Fun!")
   end
@@ -77,13 +77,13 @@ describe "Search Items using find_all and parameters" do
 
   xit "returns all items based on the created_at date time" do
 
-    get "/api/v1/items/find_all?created_at=#{@item_1.created_at}"
-
-    expect(response).to be_success
-
+    get "/api/v1/items/find_all?created_at=2012-03-27 14:54:05 UTC"
     items = JSON.parse(response.body, symbolize_names: true)
 
-    expect(items[0][:id]).to eq(@item.id)
+    expect(response).to be_success
+    expect(items.count).to eq(2)
+    expect(items[0]).to have_value(@item_1)
+    expect(items[1]).to have_value(@item_2)
 
   end
 end
