@@ -5,14 +5,39 @@ class Merchant < ApplicationRecord
   has_many :invoices
   has_many :customers, through: :invoices
 
-  def self.most_items(quantity)
-    ids = joins(:items)
-    .group(:id)
-    .order("count_id DESC")
-    .count(:id)
-    .keys[0...quantity.to_i]
+  def revenue_serializer
+    RevenueSerializer
+  end
 
-    Merchant.find(ids)
+  def self.total_merchant_revenue(merchant_id)
+    select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+    .where(id: merchant_id)
+    .joins(invoices: [:transactions, :invoice_items])
+    .merge(Transaction.successful)
+    .group(:id)
+    .order("revenue DESC")
+    .first
+    .revenue
+  end
+
+  def self.date_total_merchant_revenue(merchant_id, date)
+    where(["merchants.id = ? and merchants.created_at = ?", merchant_id, date])
+    .select("merchants.*, sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
+    .joins(invoices: [:transactions, :invoice_items])
+    .merge(Transaction.successful)
+    .group(:id)
+    .order("revenue DESC")
+    .first
+    .revenue
+  end
+
+  def self.most_items(quantity)
+    select("merchants.*, sum(invoice_items.quantity) AS item_count")
+    .joins(invoices: [:transactions, :invoice_items])
+    .merge(Transaction.successful)
+    .group(:id)
+    .order("item_count DESC")
+    .limit(quantity)
   end
 
   def favorite_customer
