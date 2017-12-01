@@ -18,7 +18,6 @@ describe "All Merchants Business Analytics Endpoints API" do
     invoice_1.items << item_1
     invoice_2.items << item_2
     invoice_3.items << item_3
-# byebug
     transaction_1 = create(:transaction, invoice_id: 1)
     transaction_2 = create(:transaction, invoice_id: 2)
     transaction_3 = create(:transaction, invoice_id: 3)
@@ -27,6 +26,7 @@ describe "All Merchants Business Analytics Endpoints API" do
 
     merchants = JSON.parse(response.body, symbolize_names: true)
 
+    # byebug
     expect(response).to be_success
     expect(merchants.count).to eq(2)
     expect(merchants[0]).to have_value(merchant_1.id) #this should actually be merchant_3, but transactions are not being created
