@@ -65,6 +65,8 @@ namespace :import do
     CSV.foreach('db/csv/transactions.csv', :headers => true, header_converters: :symbol) do |row|
       Transaction.create!(invoice: Invoice.find(row[:invoice_id]),
         result: row[:result],
+        credit_card_number: row[:credit_card_number],
+        credit_card_expiration_date: row[:credit_card_expiration_date],
         created_at: row[:created_at],
         updated_at: row[:updated_at]
       )
