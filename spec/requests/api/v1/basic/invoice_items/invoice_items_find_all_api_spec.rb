@@ -44,7 +44,7 @@ describe "InvoiceItems Find All API" do
   end
 
   it "finds all by unit price" do
-    get "/api/v1/invoice_items/find_all?unit_price=#{@invoice_item_1.unit_price}"
+    get "/api/v1/invoice_items/find_all?unit_price=1.00"
     invoice_items = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_success
