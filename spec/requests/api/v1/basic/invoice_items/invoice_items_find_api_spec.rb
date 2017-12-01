@@ -21,7 +21,7 @@ describe "InvoiceItems Find API" do
     expect(invoice_item_info).to have_value(@invoice_item_1.invoice_id)
     expect(invoice_item_info).to have_value(@invoice_item_1.item_id)
     expect(invoice_item_info).to have_value(@invoice_item_1.quantity)
-    expect(invoice_item_info).to have_value(@invoice_item_1.unit_price)
+    expect(invoice_item_info).to have_value((@invoice_item_1.unit_price).to_f / 100)
 
     expect(invoice_item_info).to_not have_value(@invoice_item_2.id)
     expect(invoice_item_info).to_not have_value(@invoice_item_3.id)
