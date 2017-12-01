@@ -17,14 +17,15 @@ class Item < ApplicationRecord
   end
 
   def best_day
-    date = invoices
+    day = invoices
     .select("invoices.*, sum(invoice_items.quantity) AS total_item_count")
     .joins(:invoice_items)
     .group(:id)
     .order("total_item_count DESC")
     .first
     .created_at
-    .as_json
+
+    {best_day: day}
   end
 
   def self.most_revenue_items(quantity)
