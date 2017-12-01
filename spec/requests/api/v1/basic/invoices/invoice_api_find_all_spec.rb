@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Search Invoices using find_all and parameters" do
 
   it "returns all invoices based on the status" do
-    invoice_collection = create_list(:invoice, 3, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+    invoice_collection = create_list(:invoice, 2, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
     invoice_1 = invoice_collection.first
     invoice_2 = invoice_collection.second
     invoice_3 = create(:invoice)
@@ -39,7 +39,7 @@ describe "Search Invoices using find_all and parameters" do
   end
 
   it "returns all invoices based on the created_at date time" do
-    invoice_collection = create_list(:invoice, 3, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+    invoice_collection = create_list(:invoice, 2, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
     invoice_1 = invoice_collection.first
     invoice_2 = invoice_collection.second
     invoice_3 = create(:invoice)
@@ -55,7 +55,7 @@ describe "Search Invoices using find_all and parameters" do
   end
 
   it "returns all invoices based on the updated_at date time" do
-    invoice_collection = create_list(:invoice, 3, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
+    invoice_collection = create_list(:invoice, 2, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
     invoice_1 = invoice_collection.first
     invoice_2 = invoice_collection.second
     invoice_3 = create(:invoice)
