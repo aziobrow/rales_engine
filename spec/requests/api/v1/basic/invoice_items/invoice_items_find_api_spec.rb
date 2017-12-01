@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe "InvoiceItems Find API" do
   before do
-    create_list(:invoice_item, 3)
+    create_list(:invoice_item, 2)
     @invoice_item_1 = InvoiceItem.first
     @invoice_item_2 = InvoiceItem.second
-    @invoice_item_3 = InvoiceItem.last
+    @invoice_item_3 = create(:invoice_item, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
   end
 
   it "finds by id" do
@@ -29,29 +29,22 @@ describe "InvoiceItems Find API" do
 
 
 
-  xit "finds by created at date" do
-    get "/api/v1/invoice_items/find?created_at=#{@invoice_item_2.created_at}"
+  it "finds by created at date" do
+    get "/api/v1/invoice_items/find?created_at=2012-03-27 14:54:05 UTC"
     invoice_item_info = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_success
     expect(invoice_item_info).to have_key(:id)
-    expect(invoice_item_info).to have_key(:name)
-    expect(invoice_item_info).to have_value(@invoice_item_2.id)
-    expect(invoice_item_info).to have_value(@invoice_item_2.name)
-    expect(invoice_item_info).to_not have_value(@invoice_item_3.id)
+    expect(invoice_item_info).to have_value(@invoice_item_3.id)
+    expect(invoice_item_info).to_not have_value(@invoice_item_1.id)
     expect(invoice_item_info).to_not have_value(@invoice_item_2.id)
   end
 
-  xit "finds by updated at date" do
-    get "/api/v1/invoice_items/find?updated_at=#{@invoice_item_3.updated_at}"
+  it "finds by updated at date" do
+    get "/api/v1/invoice_items/find?updated_at=2012-03-27 14:54:05 UTC"
     invoice_item_info = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_success
     expect(invoice_item_info).to have_key(:id)
-    expect(invoice_item_info).to have_key(:name)
     expect(invoice_item_info).to have_value(@invoice_item_3.id)
-    expect(invoice_item_info).to have_value(@invoice_item_3.item_id)
-    expect(invoice_item_info).to have_value(@invoice_item_3.invoice_id)
-    expect(invoice_item_info).to have_value(@invoice_item_3.quantity)
-    expect(invoice_item_info).to have_value(@invoice_item_3.unit_price)
     expect(invoice_item_info).to_not have_value(@invoice_item_1.id)
     expect(invoice_item_info).to_not have_value(@invoice_item_2.id)
   end

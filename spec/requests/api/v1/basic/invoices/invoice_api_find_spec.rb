@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Search Invoices using find and parameters" do
   before do
     create_list(:invoice, 3)
-    @invoice = Invoice.last
+    @invoice = create(:invoice, created_at: "2012-03-27 14:54:05 UTC", updated_at: "2012-03-27 14:54:05 UTC")
   end
 
 
@@ -33,12 +33,20 @@ describe "Search Invoices using find and parameters" do
 
   it "returns an invoice based on the created_at date time" do
 
-    get "/api/v1/invoices/find?created_at=#{@invoice.created_at}"
+    get "/api/v1/invoices/find?created_at=2012-03-27 14:54:05 UTC"
+    invoice = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_success
-
-    # invoice = JSON.parse(response.body, symbolize_names: true)
-    # expect(invoice).to have_key(:id)
-    # expect(invoice).to have_key(:status)
+    expect(invoice).to have_value(@invoice.id)
 
   end
+
+  it "returns an invoice based on the updated_at date time" do
+
+    get "/api/v1/invoices/find?created_at=2012-03-27 14:54:05 UTC"
+    invoice = JSON.parse(response.body, symbolize_names: true)
+    expect(response).to be_success
+    expect(invoice).to have_value(@invoice.id)
+
+  end
+
 end
