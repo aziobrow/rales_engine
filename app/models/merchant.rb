@@ -24,6 +24,7 @@ class Merchant < ApplicationRecord
     .order("customer_count DESC")
     .limit(1)
     .first
+  end
 
   def self.most_revenue(quantity)
     select("merchants.*, sum(invoice_items.quantity * invoice_items.unit_price) AS revenue")
