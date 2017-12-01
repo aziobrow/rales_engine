@@ -6,13 +6,12 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
 
   def self.most_items(quantity)
-    ids = joins(:items)
+    select("merchants.*, sum(invoice_items.quantity) AS item_count")
+    .joins(invoices: [:transactions, :invoice_items])
+    .merge(Transaction.successful)
     .group(:id)
-    .order("count_id DESC")
-    .count(:id)
-    .keys[0...quantity.to_i]
-
-    Merchant.find(ids)
+    .order("item_count DESC")
+    .limit(quantity)
   end
 
   def favorite_customer
