@@ -13,7 +13,12 @@
 # it.
 #
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start do
+  load_profile 'rails'
+  add_filter 'app/channels'
+  add_filter 'app/jobs'
+  add_filter 'app/mailers'
+end
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

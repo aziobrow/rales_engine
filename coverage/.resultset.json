@@ -631,16 +631,6 @@
         null,
         null
       ],
-      "/Users/laurenbillington/turing/3module/projects/rales_engine/app/mailers/application_mailer.rb": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "/Users/laurenbillington/turing/3module/projects/rales_engine/app/jobs/application_job.rb": [
-        0,
-        0
-      ],
       "/Users/laurenbillington/turing/3module/projects/rales_engine/app/controllers/api/v1/merchants/favorite_customer_controller.rb": [
         0,
         0,
@@ -660,20 +650,8 @@
         0,
         0,
         0
-      ],
-      "/Users/laurenbillington/turing/3module/projects/rales_engine/app/channels/application_cable/connection.rb": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "/Users/laurenbillington/turing/3module/projects/rales_engine/app/channels/application_cable/channel.rb": [
-        0,
-        0,
-        0,
-        0
       ]
     },
-    "timestamp": 1512148505
+    "timestamp": 1512150098
   }
 }
