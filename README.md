@@ -41,13 +41,14 @@ Be sure to run
 rails c
 ```
 ...and check that each of the tables have Active Record instances:
+```
 Merchant.first
 Customer.first
 Invoice.first
 Item.first
 Item_invoice.first
 Transaction.first
-
+```
 
 ## Running the tests
 
