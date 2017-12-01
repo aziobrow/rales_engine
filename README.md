@@ -8,9 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Ruby 2+
-Rails 4+
-See Gemfile for required gems and their versions
+Ruby 2+  
+Rails 4+  
+See Gemfile for required gems and their versions  
 
 ### Installing
 
@@ -69,11 +69,11 @@ and navigate to localhost3000/api/v1/merchants to get started.
 
 In addition to RESTful show and index pages, there are several BI requests available:
 Each table has:
-/api/v1/table/find?=      #search by attribute or column name
-/api/v1/table/find_all?=  #search by attribute or column name
-/api/v1/table/random      #returns a random resource
+/api/v1/table/find?=      #search by attribute or column name  
+/api/v1/table/find_all?=  #search by attribute or column name  
+/api/v1/table/random      #returns a random resource  
 
-In addition, API requests can be made using these endpoints:
+In addition, API requests can be made using these endpoints:  
 
 Relationship Endpoints - Merchants
 	GET /api/v1/merchants/:id/items          returns a collection of items associated with that merchant
